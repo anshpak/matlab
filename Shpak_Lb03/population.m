@@ -47,8 +47,21 @@ death_koef = [d_C / 100, 0, 0, d_A / 100];
 format long g
 round(pop .* death_koef);
 sum(round(pop .* death_koef));
-% Вектор коэффициентов для подсчета жизни:
-alive_koef = [1 - d_C / 100, 0, 0, 1 - d_A / 100];
+
+% Вектор коэффициентов для подсчета выживших:
+alive_koef = [1 - d_C / 100, 1, 1, 1 - d_A / 100];
 % Проверяю, сколько выжило за год:
-round(pop .* alive_koef)
-sum(round(pop .* alive_koef))
+round(pop .* alive_koef);
+sum(round(pop .* alive_koef));
+
+% Вектор коэффициентов для подсчета покидающих диапазон:
+leave_koef = [(1 - d_C / 100) / n1, 1 / n2, 1 / n3, (1 - d_A / 100) / n4];
+% Проверяю, сколько покинуло диапазон за год:
+round(pop .* leave_koef);
+sum(round(pop .* leave_koef));
+
+% Вектор коэффициентов для подсчета прибывающих в диапазон:
+arrive_koef = [b / 100, (1 - d_C / 100) / n1, 1 / n2, 1 / n3];
+% Проверяю, сколько покинуло диапазон за год:
+round(pop .* arrive_koef);
+sum(round(pop .* arrive_koef));
