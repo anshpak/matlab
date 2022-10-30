@@ -45,5 +45,10 @@ n4 = 19;
 death_koef = [d_C / 100, 0, 0, d_A / 100];
 % Проверяю, сколько умерло за год:
 format long g
-round(pop .* death_koef)
-sum(round(pop .* death_koef))
+round(pop .* death_koef);
+sum(round(pop .* death_koef));
+% Вектор коэффициентов для подсчета жизни:
+alive_koef = [1 - d_C / 100, 0, 0, 1 - d_A / 100];
+% Проверяю, сколько выжило за год:
+round(pop .* alive_koef)
+sum(round(pop .* alive_koef))
