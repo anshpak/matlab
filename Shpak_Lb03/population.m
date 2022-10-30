@@ -65,3 +65,8 @@ arrive_koef = [b / 100, (1 - d_C / 100) / n1, 1 / n2, 1 / n3];
 % Проверяю, сколько покинуло диапазон за год:
 round(pop .* arrive_koef);
 sum(round(pop .* arrive_koef));
+
+% Пробую посчитать население по группам за 1 год:
+round(pop + pop .* arrive_koef - pop .* leave_koef)
+sum(pop)
+sum(round(pop + pop .* arrive_koef - pop .* leave_koef))
