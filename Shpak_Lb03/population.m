@@ -8,8 +8,8 @@
 % 1) Внутри одного возрастного диапазона возрастного диапазона возрастное
 % распределение постоянно, то есть в каждой годовой группе содержится
 % одинаковое число людей;
-% 2) Не рассматривается диапазон лиц старше 69 лет;
-% 3) Смерти случаются лишь в возрастном диапазоне 60 - 69 лет с
+% 2) Не рассматривается диапазон лиц старше 74 лет;
+% 3) Смерти случаются лишь в возрастном диапазоне 55 - 74 лет с
 % интенсивностью d_A % в год и в диапазоне 0 - 5 лет с интенсивностью d_С %
 % в год;
 % 4) Рождения соответствуют возрастному диапазону родителей в 20 - 59 лет с
@@ -63,10 +63,34 @@ sum(round(pop .* leave_koef));
 % Вектор коэффициентов для подсчета прибывающих в диапазон:
 arrive_koef = [b / 100, (1 - d_C / 100) / n1, 1 / n2, 1 / n3];
 % Проверяю, сколько покинуло диапазон за год:
-round(pop .* arrive_koef);
-sum(round(pop .* arrive_koef));
+pop_for_arr = [pop(3), pop(1), pop(2), pop(3)];
+round(pop_for_arr .* arrive_koef);
+sum(round(pop_for_arr .* arrive_koef));
 
 % Пробую посчитать население по группам за 1 год:
-round(pop + pop .* arrive_koef - pop .* leave_koef)
-sum(pop)
-sum(round(pop + pop .* arrive_koef - pop .* leave_koef))
+round(pop + pop .* arrive_koef - pop .* leave_koef);
+sum(pop);
+sum(round(pop + pop .* arrive_koef - pop .* leave_koef));
+
+% Пробую посчитать население по группам в течение 100 лет:
+amount_of_population = sum(pop);
+for tmp = 1:20
+    pop_for_arr = [pop(3), pop(1), pop(2), pop(3)];
+    amount_of_population = amount_of_population + sum(round(pop_for_arr .* arrive_koef - pop .* leave_koef));
+    pop = round(pop + pop_for_arr .* arrive_koef - pop .* leave_koef);
+end
+pop
+amount_of_population
+
+% График населения:
+pop = [N1 N2 N3 N4];
+X = 1:100;
+Y = 1:100;
+amount_of_population = sum(pop);
+for tmp = 1:100
+    pop_for_arr = [pop(3), pop(1), pop(2), pop(3)];
+    amount_of_population = amount_of_population + sum(round(pop_for_arr .* arrive_koef - pop .* leave_koef));
+    pop = round(pop + pop_for_arr .* arrive_koef - pop .* leave_koef);
+    Y(tmp) = amount_of_population;
+end
+plot(X, Y)
