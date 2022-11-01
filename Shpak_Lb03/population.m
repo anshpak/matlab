@@ -34,10 +34,10 @@ d_C = 3.23;
 d_A = d - d_C;
 
 % Начальное распределение населения:
-N1 = 2798349;
-N2 = 6744408;
-N3 = 28249718;
-N4 = 15350381;
+N1 = 4639064;
+N2 = 8585124;
+N3 = 30090434;
+N4 = 17191097;
 pop = [N1 N2 N3 N4];
 
 % 2. Постройте преобразования, описывающие эволюцию этой модели населения.
@@ -78,7 +78,7 @@ amount_of_population = sum(pop);
 for tmp = 1:20
     pop_for_arr = [pop(3), pop(1), pop(2), pop(3)];
     amount_of_population = amount_of_population + sum(round(pop_for_arr .* arrive_koef - pop .* leave_koef - pop .* death_koef));
-    pop = round(pop + pop_for_arr .* arrive_koef - pop .* leave_koef);
+    pop = round(pop + pop_for_arr .* arrive_koef - pop .* leave_koef - pop .* death_koef);
 end
 pop
 amount_of_population
