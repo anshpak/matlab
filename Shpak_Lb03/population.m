@@ -1,3 +1,5 @@
+% Ход работы.
+
 % Цель: зная возрастное распределение населения за некоторый год, спрогнозировать
 % вероятностное возрастное распределение на следующий год
 
@@ -21,6 +23,7 @@
 % Я решил взять данные по населению Италии на 2019 год.
 % А потом можно будет сравнить с предполагаемыми исследованиями на 100 лет
 % вперед.
+
 % Уровень рождаемости:
 b = 1.24;
 % Уровень смертности:
@@ -29,18 +32,21 @@ d = 10.566;
 d_C = 3.23;
 % Уровень взрослой смертности:
 d_A = d - d_C;
+
 % Начальное распределение населения:
 N1 = 2798349;
 N2 = 6744408;
 N3 = 28249718;
 N4 = 15350381;
 pop = [N1 N2 N3 N4];
+
 % 2. Постройте преобразования, описывающие эволюцию этой модели населения.
 % Число годовых групп:
 n1 = 6;
 n2 = 12;
 n3 = 36;
 n4 = 19;
+
 % Вектор коэффициентов для подсчета смертности:
 death_koef = [d_C / 100, 0, 0, d_A / 100];
 % Проверяю, сколько умерло за год:
@@ -67,31 +73,12 @@ pop_for_arr = [pop(3), pop(1), pop(2), pop(3)];
 round(pop_for_arr .* arrive_koef);
 sum(round(pop_for_arr .* arrive_koef));
 
-% Пробую посчитать население по группам за 1 год:
-round(pop + pop .* arrive_koef - pop .* leave_koef);
-sum(pop);
-sum(round(pop + pop .* arrive_koef - pop .* leave_koef));
-
-% Пробую посчитать население по группам в течение 100 лет:
+% Пробую посчитать население по группам в течение 20 лет:
 amount_of_population = sum(pop);
 for tmp = 1:20
     pop_for_arr = [pop(3), pop(1), pop(2), pop(3)];
-    amount_of_population = amount_of_population + sum(round(pop_for_arr .* arrive_koef - pop .* leave_koef));
+    amount_of_population = amount_of_population + sum(round(pop_for_arr .* arrive_koef - pop .* leave_koef - pop .* death_koef));
     pop = round(pop + pop_for_arr .* arrive_koef - pop .* leave_koef);
 end
 pop
 amount_of_population
-
-% График населения:
-pop = [N1 N2 N3 N4];
-X = 1:100;
-Y = 1:100;
-amount_of_population = sum(pop);
-for tmp = 1:100
-    pop_for_arr = [pop(3), pop(1), pop(2), pop(3)];
-    amount_of_population = amount_of_population + sum(round(pop_for_arr .* arrive_koef - pop .* leave_koef));
-    pop = round(pop + pop_for_arr .* arrive_koef - pop .* leave_koef);
-    Y(tmp) = amount_of_population;
-end
-plot(X, Y)
-myfunc(1, 2)
