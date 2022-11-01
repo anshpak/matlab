@@ -94,3 +94,4 @@ for tmp = 1:100
     Y(tmp) = amount_of_population;
 end
 plot(X, Y)
+myfunc(1, 2)
