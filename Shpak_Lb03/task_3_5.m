@@ -1,7 +1,6 @@
-% Постойте графики распределения населения общего количества 
-% населения в течение 100 лет:
+% Постойте графики распределения населения по группам в течение 100 лет:
 % Уровень рождаемости:
-b = 2.24;
+b = 4.24;
 % Уровень смертности:
 d = 0.070566;
 % Уровень детской смертности:
@@ -21,8 +20,4 @@ years = 100;
 [pop, population_in_year] = get_population(N1, N2, N3, N4, n1, n2, n3, n4, b, d, d_C, years);
 
 X = 1:years;
-Y = 1:years;
-for i = 1:years
-    Y(i) = sum(population_in_year(i,:));
-end
-plot(X, Y)
+plot(X, [population_in_year(:,1), population_in_year(:,2), population_in_year(:,3), population_in_year(:,4)])
