@@ -1,0 +1,12 @@
+function result_matrix = my_fib(n)
+%MY_Fib calculates the succession of the Fibonacci
+%   Calculate the succession of the Fibonacci using recursion
+result_matrix = [];
+if (n == 0) || (n == 1)
+    result_matrix(1:2) = 1;
+else
+    result_matrix(n - 1) = my_fib(n - 1);
+    result_matrix(n - 2) = my_fib(n - 2);
+    result_matrix(n) = result_matrix(n - 1) + result_matrix(n - 2);
+end
+end
