@@ -32,5 +32,25 @@ points_B(n + 1, :) = points_B(1, :);
 
 plot(points_B(:, 1), points_B(:, 2), 'g')
 
+t = 0 : h : 1;
+
+for i = 1:n
+    S_x = (1 - t) .* points_A(:, 1) + t .* points_B(:, 1);
+    S_y = (1 - t) .* points_A(:, 2) + t .* points_B(:, 2);
+end
+
+for i = 1:size(S_x, 2)
+    h1 = plot(S_x(:, i), S_y(:, i), '.b', 'MarkerSize', 25);
+    h2 = plot(S_x(:, i), S_y(:, i), 'g', 'MarkerSize', 20);
+    axis([-1 1 -1 1])
+    drawnow
+    pause(.03)
+    if(n ~= 1) || (n ~= size(S_1, 2))
+        set(h1, 'Visible', 'Off')
+        set(h2, 'Visible', 'Off')
+        clear h
+    end
+end
+
 end
 

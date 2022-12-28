@@ -62,26 +62,3 @@ for n = size(S_1, 2):-1:1
     end
 end
 end
-
-
-
-t = 0 : h : 1;
-S_1 = (1 - t) * A(1, 1) + t * B(1, 1);
-S_1(2, :) = (1 - t) * A(1, 2) + t * B(1, 2);
-S_2 = (1 - t) * A(2, 1) + t * B(2, 1);
-S_2(2, :) = (1 - t) * A(2, 2) + t * B(2, 2);
-% S - массив в две строки
-for n = 1:size(S_1, 2)
-    h1 = plot(S_1(1, n), S_1(2, n), '.r', 'MarkerSize', 25);
-    h2 = plot(S_2(1, n), S_2(2, n), '.b', 'MarkerSize', 25);
-    h3 = plot([S_1(1, n), S_2(1, n)], [S_1(2, n), S_2(2, n)], 'g', 'MarkerSize', 20);
-    axis([-1 1 -1 1])
-    drawnow
-    pause(.03)
-    if(n ~= 1) || (n ~= size(S_1, 2))
-        set(h1, 'Visible', 'Off')
-        set(h2, 'Visible', 'Off')
-        set(h3, 'Visible', 'Off')
-        clear h
-    end
-end
