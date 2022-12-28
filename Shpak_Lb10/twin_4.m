@@ -15,6 +15,10 @@ for i = 2:n
     plot(points_A(i, 1), points_A(i, 2), '.b', 'MarkerSize', 25)
 end
 
+points_A(n + 1, :) = points_A(1, :);
+
+plot(points_A(:, 1), points_A(:, 2), 'g')
+
 points_B = ginput(1);
 plot(points_B(1, 1), points_B(1, 2), '.r', 'MarkerSize', 25)
 text(points_B(1), points_B(2) + .1, 'B', 'Color', 'y', 'FontWeight', 'bold');
@@ -23,5 +27,10 @@ for i = 2:n
     points_B(i, :) = ginput(1);
     plot(points_B(i, 1), points_B(i, 2), '.r', 'MarkerSize', 25)
 end
+
+points_B(n + 1, :) = points_B(1, :);
+
+plot(points_B(:, 1), points_B(:, 2), 'g')
+
 end
 
