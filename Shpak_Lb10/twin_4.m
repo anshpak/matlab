@@ -7,15 +7,21 @@ clf
 axis([-1 1 -1 1])
 title('Enter n segments')
 hold on
-points = ginput(1);
-text(points(1, 1), points(1, 2) + .1, 'A', 'Color', 'y', 'FontWeight', 'bold');
-plot(points(1, 1), points(1, 2), '.b', 'MarkerSize', 25)
+points_A = ginput(1);
+text(points_A(1, 1), points_A(1, 2) + .1, 'A', 'Color', 'y', 'FontWeight', 'bold');
+plot(points_A(1, 1), points_A(1, 2), '.b', 'MarkerSize', 25)
 for i = 2:n
-    i
-    points(i, :) = ginput(1);
-    plot(points(i, 1), points(i, 2), '.b', 'MarkerSize', 25)
+    points_A(i, :) = ginput(1);
+    plot(points_A(i, 1), points_A(i, 2), '.b', 'MarkerSize', 25)
 end
 
+points_B = ginput(1);
+plot(points_B(1, 1), points_B(1, 2), '.r', 'MarkerSize', 25)
+text(points_B(1), points_B(2) + .1, 'B', 'Color', 'y', 'FontWeight', 'bold');
 
+for i = 2:n
+    points_B(i, :) = ginput(1);
+    plot(points_B(i, 1), points_B(i, 2), '.r', 'MarkerSize', 25)
+end
 end
 
